@@ -1,4 +1,4 @@
-# 📈 Black-Scholes Option Pricer
+# Black-Scholes Option Pricer
 
 This module implements a simple **European call option pricer** based on the Black-Scholes model, using Python and Streamlit.
 
@@ -6,7 +6,7 @@ It is part of the [Structure-Lab](https://github.com/yourname/structure-lab) pro
 
 ---
 
-## 🧠 Core Idea
+## Core Idea
 
 > A mathematical formula is not just something to calculate with, but something to construct with.
 
@@ -14,7 +14,7 @@ The Black-Scholes model provides a closed-form solution for option pricing under
 
 ---
 
-## 🧪 Demo
+## Demo
 
 To run locally:
 
