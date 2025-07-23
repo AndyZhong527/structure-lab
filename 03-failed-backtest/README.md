@@ -1,8 +1,5 @@
 ## ✅ README.md
 
-```markdown
-# 03-failed-backtest
-
 This repository documents my failed attempt to backtest a simple SMA crossover strategy on AAPL stock using Python. While the strategy never worked as intended, the process exposed deeper flaws in my thinking and forced me to reflect on modeling structure.
 
 ## What I Tried
