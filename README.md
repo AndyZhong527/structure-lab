@@ -8,7 +8,7 @@ I started this project during my independent research into financial mathematics
 
 ---
 
-## 🌐 Project Structure
+## Project Structure
 
 | Module | Title | Key Question |
 |--------|-------|---------------|
@@ -26,7 +26,7 @@ Each module includes:
 
 ---
 
-## 📘 Blog Archive
+## Blog Archive
 
 All essays originally published in my English blog are included in `/06-essays`. These serve as narrative explanations of the ideas behind each model.
 
