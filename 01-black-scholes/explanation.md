@@ -10,7 +10,7 @@ It may seem like a small “finance utility” project, but to me it was a deepe
 
 ---
 
-## 📘 A Brief Overview of Black-Scholes
+## A Brief Overview of Black-Scholes
 
 The Black-Scholes model prices European-style options under several key assumptions:
 
@@ -44,7 +44,7 @@ This model is deeply mathematical — it begins from stochastic processes and us
 
 ---
 
-## 💻 Code Implementation
+## Code Implementation
 
 The entire app is about 30 lines of Python, using:
 
@@ -64,7 +64,7 @@ This wasn’t just “coding a formula” — it was a shift in mindset: from sy
 
 ---
 
-## 🧠 What I Really Learned
+## What I Really Learned
 
 ### 1. Models are State Functions, Not Just Formulas
 
@@ -92,7 +92,7 @@ That’s the kind of structural control I want to understand better — from pro
 
 ---
 
-## 🧩 Future Extensions
+## Future Extensions
 
 This tool is simple for now, but I have several ideas:
 
@@ -103,7 +103,7 @@ This tool is simple for now, but I have several ideas:
 
 ---
 
-## 🎯 Final Thought
+## Final Thought
 
 I don’t want to be just a student who can “solve problems.”  
 I want to be someone who can **build systems** that bring mathematical models to life.
