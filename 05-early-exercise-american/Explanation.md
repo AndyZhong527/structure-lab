@@ -1,63 +1,64 @@
-Pricing American Options via Binomial Tree with Early Exercise Logic
-In the Black-Scholes world, European options are priced by backward induction—calculating the expected payoff under the risk-neutral measure and discounting it step by step. But this logic assumes the option can only be exercised at maturity.
+Explanation: Pricing American Options via Binomial Tree with Early Exercise Logic
+In the Black-Scholes world, European options are priced through backward induction—computing expected payoffs under the risk-neutral measure and discounting them step by step. But this method assumes the option can only be exercised at maturity.
 
-American options are different. They introduce an extra layer of decision-making: at every single step, the holder may choose to exercise the option early.
+American options introduce a new layer of decision-making: at every single node, the holder may choose to exercise the option early.
 
-This transforms the model from a simple recursive expectation to a local optimization problem at every node.
+This transforms the pricing process from simple expectation into a local optimization problem at each node.
 
-The Modeling Shift: From Expectation to Max(Immediate, Continuation)
-Let’s consider a standard binomial model:
+Modeling Shift: From Expectation to max(Immediate, Continuation)
+We begin with a standard binomial model:
 
-At each time step t, the asset price either moves up by a factor u or down by a factor d.
+At each step t, the asset price either moves up by factor u or down by factor d.
 
-The risk-neutral probability q is computed as:
+The risk-neutral probability is:
 
 q = ((1 + r) - d) / (u - d)
-For a European option, the value at node (t, i) is computed by taking the discounted expected value from the next step:
 
-V(t, i) = (1 / (1 + r)) * (q * V(t+1, i+1) + (1 - q) * V(t+1, i))
-But for an American option, we modify this as:
+For European options, the value at node (t, i) is given by:
 
-V(t, i) = max( Payoff(S(t, i)), ContinuationValue )
+V(t, i) = (1 / (1 + r)) * [ q * V(t+1, i+1) + (1 - q) * V(t+1, i) ]
+
+But for American options, we embed early exercise by taking the maximum between immediate exercise and continuation:
+
+V(t, i) = max( Payoff(S(t, i)), Continuation )
+
 Where:
 
-Payoff(S) = immediate exercise value at the current node
+For a call: Payoff(S) = max(0, S - K)
 
-ContinuationValue = same as the European-style expected discounted value
+For a put: Payoff(S) = max(0, K - S)
 
-This logic must be applied at every step of the backward induction, starting from the terminal payoff and moving backward to the root.
+This max operation is applied at every step of the recursion.
 
-Algorithm Logic: Early Exercise Embedded in Recursion
-The structure of the valuation process:
-
+Recursive Algorithm with Early Exercise
 Build the price tree using:
 
-S(t, i) = S0 * (u^i) * (d^(t - i))
-Initialize final payoffs at t = T, using:
+S(t, i) = S0 * u^i * d^(t - i)
+
+Initialize payoffs at maturity (t = T):
 
 Call: max(0, S(T, i) - K)
-Put:  max(0, K - S(T, i))
-Roll back the tree:
 
-At each (t, i), compute:
+Put: max(0, K - S(T, i))
 
-Continuation = (1 / (1 + r)) * (q * V(t+1, i+1) + (1 - q) * V(t+1, i))
-Exercise = max(0, S(t, i) - K)    # for call
-          or
-          max(0, K - S(t, i))     # for put
+Perform backward induction with early exercise logic:
 
-V(t, i) = max(Continuation, Exercise)
-This recursive step embeds an early-exercise decision rule directly inside the model structure.
+Continuation = (1 / (1 + r)) * [ q * V(t+1, i+1) + (1 - q) * V(t+1, i) ]
 
-Why This Matters: Embedding Decisions into Models
-What makes this powerful is not just the pricing result, but the structural change it introduces. You’re no longer computing pure expectations—you’re encoding local decision logic into the recursion.
+Then:
 
-This reflects a higher-dimensional modeling mindset:
+V(t, i) = max( Payoff(S(t, i)), Continuation )
 
-From valuation → optimization
+The final result V(0, 0) gives the theoretical price of the American option.
 
-From single path → decision at every node
+What’s New Structurally?
+This isn’t just a numerical tweak—it’s a conceptual upgrade:
 
-From expected future → maximum controllable present
+The max operation at each node turns the tree into a dynamic programming structure.
 
-It’s not just a math trick. It’s the beginning of turning a financial formula into a decision-aware system.
+We no longer solve a pure expectation problem but a sequential decision process.
+
+Early exercise is no longer an edge case—it’s embedded into the core of the valuation structure.
+
+This recursive design reflects the true flexibility granted to American option holders and shows how pricing becomes a locally optimal control problem over a discrete-time process.
+
